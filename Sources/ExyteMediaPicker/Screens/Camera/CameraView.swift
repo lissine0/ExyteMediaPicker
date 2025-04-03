@@ -40,7 +40,7 @@ struct CustomCameraView<CameraViewContent: View>: View {
             { Task { await cameraViewModel.toggleFlash() } }, // flash off/on
             { Task { await cameraViewModel.flipCamera() } } // camera back/front
         )
-        .onChange(of: cameraViewModel.capturedPhoto) { _ , newValue in
+        .onChange(of: cameraViewModel.capturedPhoto) { newValue in
             viewModel.pickedMediaUrl = newValue
             didTakePicture()
         }
@@ -78,7 +78,6 @@ struct StandardConrolsCameraView: View {
 
                 Spacer()
             }
-            .safeAreaPadding(.top, UIApplication.safeArea.top)
 
             LiveCameraView(
                 session: cameraViewModel.captureSession,
@@ -152,7 +151,7 @@ struct StandardConrolsCameraView: View {
             .padding(.bottom, 50)
         }
         .background(theme.main.cameraBackground)
-        .onChange(of: scenePhase) {
+        .onChange(of: scenePhase) { _ in
             Task {
                 if scenePhase == .background {
                     await cameraViewModel.stopSession()
@@ -161,7 +160,7 @@ struct StandardConrolsCameraView: View {
                 }
             }
         }
-        .onChange(of: cameraViewModel.capturedPhoto) { _ , newValue in
+        .onChange(of: cameraViewModel.capturedPhoto) { newValue in
             if let photo = newValue {
                 viewModel.pickedMediaUrl = photo
                 didTakePicture()

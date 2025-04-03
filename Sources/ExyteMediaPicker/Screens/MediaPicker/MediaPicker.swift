@@ -126,18 +126,18 @@ public struct MediaPicker<AlbumSelectionContent: View, CameraSelectionContent: V
             }
             viewModel.onStart()
         }
-        .onChange(of: viewModel.albums) { _ , albums in
+        .onChange(of: viewModel.albums) { albums in
             self.albums = albums.map { $0.toAlbum() }
         }
-        .onChange(of: pickerMode?.wrappedValue) { _ , mode in
+        .onChange(of: pickerMode?.wrappedValue) { mode in
             if let mode = mode {
                 viewModel.setPickerMode(mode)
             }
         }
-        .onChange(of: viewModel.internalPickerMode) { _ , newValue in
+        .onChange(of: viewModel.internalPickerMode) { newValue in
             internalPickerMode = newValue
         }
-        .onChange(of: currentFullscreenMedia) { 
+        .onChange(of: currentFullscreenMedia) { _ in
             _currentFullscreenMediaBinding.wrappedValue = currentFullscreenMedia
         }
         .onAppear {

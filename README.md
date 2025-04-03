@@ -229,7 +229,7 @@ dependencies: [
 
 ## Requirements
 
-* iOS 17+
+* iOS 16+
 * Xcode 15+ 
 
 ## Our other open source SwiftUI libraries

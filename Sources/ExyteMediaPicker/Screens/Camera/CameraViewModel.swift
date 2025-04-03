@@ -217,7 +217,7 @@ final actor CameraViewModel: NSObject, ObservableObject {
     private func updateOutputOrientation(_ output: AVCaptureOutput) {
         guard let connection = output.connection(with: .video) else { return }
         if connection.isVideoRotationAngleSupported(0) {
-            connection.videoRotationAngle = 0
+            connection.videoOrientation = .portrait
         }
     }
 
@@ -246,7 +246,7 @@ final actor CameraViewModel: NSObject, ObservableObject {
 
     private func selectAudioCaptureDevice() -> AVCaptureDevice? {
         let session = AVCaptureDevice.DiscoverySession(
-            deviceTypes: [.microphone],
+            deviceTypes: [.builtInMicrophone],
             mediaType: .audio,
             position: .unspecified)
 

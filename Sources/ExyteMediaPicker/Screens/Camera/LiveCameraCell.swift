@@ -27,7 +27,7 @@ struct LiveCameraCell: View {
                     .foregroundColor(.white)
             )
         }
-        .onChange(of: scenePhase) {
+        .onChange(of: scenePhase) { _ in
             Task {
                 if scenePhase == .background {
                     await cameraViewModel.stopSession()
